@@ -4,13 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Secondary Analyses | Global Social Media Experiment</title>
-  <meta name="description" content="Approved secondary analysis projects for the Global Social Media Experiment, and how collaborators take the forecasting survey and get access to the data.">
+  <meta name="description" content="Approved secondary analysis projects for the Global Social Media Experiment, with the researchers on each project and links to their preregistrations.">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Literata:opsz,wght@7..72,400;7..72,600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/style.css">
-  <noscript><style>#projects-status, .filter { display: none; }</style></noscript>
+  <noscript><style>#projects-status, .filter, .hero-stats { display: none; }</style></noscript>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -20,14 +20,13 @@
       <a class="brand" href="#top">Global Social Media Experiment</a>
       <nav aria-label="Sections">
         <ul class="nav-list">
-          <li><a href="#process">How it works</a></li>
           <li><a href="#projects">Projects</a></li>
+          <li><a href="#process">Process</a></li>
+          <li><a href="#about">The study</a></li>
           <li><a href="#faq">FAQ</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
-      <!-- Survey link: replace https://example.com everywhere it appears (all links marked data-survey-link) -->
-      <a class="button button-small" href="https://example.com" data-survey-link target="_blank" rel="noopener">Take the survey</a>
     </div>
   </header>
 
@@ -35,95 +34,23 @@
     <section class="hero" id="top">
       <div class="wrap hero-inner">
         <div class="hero-copy">
-          <h1>Forecast the results, then get the data for your project</h1>
+          <h1>Approved secondary analyses</h1>
           <p class="lede">
-            Data collection for the Global Social Media Experiment is complete, and the leadership
-            team has selected the secondary analysis projects listed on this page. Before anyone
-            receives the data, we ask each collaborator to predict what the main study found.
+            Researchers in the Global Social Media Experiment are using its 23-country dataset to
+            answer questions beyond the main paper. This page lists every secondary analysis approved
+            by the leadership team, the researchers working on it, and its preregistration.
           </p>
           <div class="hero-actions">
-            <a class="button" href="https://example.com" data-survey-link target="_blank" rel="noopener">Take the forecasting survey</a>
-            <a class="button button-ghost" href="#projects">Browse projects</a>
+            <a class="button" href="#projects">Browse projects</a>
+            <a class="button button-ghost" href="#about">About the study</a>
           </div>
         </div>
-        <figure class="hero-figure" aria-hidden="true">
-          <svg id="forecast-plot" viewBox="0 0 360 240" role="presentation"></svg>
-        </figure>
-      </div>
-    </section>
-
-    <section class="section" id="about">
-      <div class="wrap two-col">
-        <div class="col-main">
-          <h2>About the study</h2>
-          <p>
-            The <a href="https://globalsocialmediastudy.com/" target="_blank" rel="noopener">Global Social Media Experiment</a> tests
-            the causal effects of social media use around the world. Participants in 23 countries were
-            paid to cut back their social media screen-time for two weeks. We then measured how this
-            changed their polarization, intergroup attitudes, well-being, news knowledge, and exposure
-            to online hostility.
-          </p>
-          <p>
-            The main analyses are preregistered as a
-            <a href="https://www.nature.com/nature/for-authors/registered-reports" target="_blank" rel="noopener">Registered Report</a>
-            that received in-principle acceptance at <i>Nature</i>, and the
-            <a href="https://osf.io/preprints/psyarxiv/ujtxa_v1" target="_blank" rel="noopener">Stage 1 protocol</a> describes the
-            design in full. The dataset can answer many questions beyond the main paper. Collaborators
-            proposed secondary analyses, and the projects selected by the leadership team are listed below.
-          </p>
-        </div>
-        <dl class="facts">
-          <div><dt>Countries</dt><dd>23</dd></div>
-          <div><dt>Participants</dt><dd>8,000+</dd></div>
-          <div><dt>Intervention</dt><dd>Two weeks of reduced social media use</dd></div>
-          <div><dt>Data collection</dt><dd>January to September 2026</dd></div>
+        <!-- Filled in by assets/main.js from data/projects.json -->
+        <dl class="hero-stats" id="hero-stats" hidden>
+          <div><dt>Approved projects</dt><dd data-stat="projects"></dd></div>
+          <div><dt>Researchers</dt><dd data-stat="researchers"></dd></div>
+          <div><dt>Preregistrations posted</dt><dd data-stat="preregistered"></dd></div>
         </dl>
-      </div>
-    </section>
-
-    <section class="section section-tint" id="process">
-      <div class="wrap">
-        <h2>How it works</h2>
-        <p class="section-intro">
-          Forecasts only count if they're made before anyone has seen the results, so the survey always
-          comes before the data.
-        </p>
-        <ol class="steps">
-          <li class="step">
-            <h3>Find your project</h3>
-            <p>
-              Check that your project appears in the <a href="#projects">list of approved projects</a>.
-              If it's missing or the details are wrong, <a href="#contact">email us</a>.
-            </p>
-          </li>
-          <li class="step">
-            <h3>Take the forecasting survey</h3>
-            <p>
-              Predict the effects of reducing social media use on the study's main outcomes. There are
-              no right or wrong answers, and your forecasts don't affect your access to the data.
-            </p>
-            <!-- TODO: confirm survey length -->
-            <p class="step-meta">About 15 to 20 minutes</p>
-          </li>
-          <li class="step">
-            <h3>Tell us about your project</h3>
-            <!-- TODO: confirm what the survey asks about the project -->
-            <p>
-              At the end of the survey, share with us the necessary information about a secondary analysis
-              that you'd like to conduct (if you have one). If approved, we'll add it to the <a href="#projects">table on this page</a>.
-            </p>
-          </li>
-          <li class="step">
-            <h3>Receive the data</h3>
-            <p>
-              Once the forecasting window closes, we'll share the anonymized dataset.
-            </p>
-          </li>
-        </ol>
-        <div class="process-cta">
-          <a class="button" href="https://example.com" data-survey-link target="_blank" rel="noopener">Take the forecasting survey</a>
-          <p>Questions first? Read the <a href="#faq">FAQ</a> or <a href="#contact">email the team</a>.</p>
-        </div>
       </div>
     </section>
 
@@ -133,7 +60,8 @@
           <div>
             <h2>Approved projects</h2>
             <p class="section-intro">
-              These are secondary analyses that have already been approved.
+              Every secondary analysis approved by the leadership team, with a link to its
+              preregistration once the team has posted it.
             </p>
           </div>
           <div class="filter">
@@ -164,25 +92,130 @@
       </div>
     </section>
 
+    <section class="section section-tint" id="process">
+      <div class="wrap">
+        <h2>From approval to publication</h2>
+        <p class="section-intro">
+          Each project on this page goes through the same three stages.
+        </p>
+        <ol class="steps">
+          <li class="step">
+            <h3>Approved</h3>
+            <p>
+              The leadership team reviewed proposed secondary analyses and approved the projects
+              listed here, checking for overlap between them.
+            </p>
+          </li>
+          <li class="step">
+            <h3>Preregistered</h3>
+            <!-- TODO: confirm preregistration policy -->
+            <p>
+              Teams record their hypotheses and analysis plans in a public preregistration, for
+              example on <a href="https://osf.io/" target="_blank" rel="noopener">OSF</a>, before
+              analyzing the data. We add the link to the <a href="#projects">table</a> once it's posted.
+            </p>
+          </li>
+          <li class="step">
+            <h3>Published</h3>
+            <!-- TODO: confirm embargo terms -->
+            <p>
+              Teams share their results publicly after the main paper is published in <i>Nature</i>,
+              which protects the Registered Report review.
+            </p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="wrap two-col">
+        <div class="col-main">
+          <h2>About the study</h2>
+          <p>
+            The <a href="https://globalsocialmediastudy.com/" target="_blank" rel="noopener">Global Social Media Experiment</a> tests
+            the causal effects of social media use around the world. Participants in 23 countries were
+            paid to cut back their social media screen-time for two weeks. We then measured how this
+            changed their polarization, intergroup attitudes, well-being, news knowledge, and exposure
+            to online hostility.
+          </p>
+          <p>
+            The main analyses are preregistered as a
+            <a href="https://www.nature.com/nature/for-authors/registered-reports" target="_blank" rel="noopener">Registered Report</a>
+            that received in-principle acceptance at <i>Nature</i>, and the
+            <a href="https://osf.io/preprints/psyarxiv/ujtxa_v1" target="_blank" rel="noopener">Stage 1 protocol</a> describes the
+            design in full. The dataset can answer many questions beyond the main paper, and the
+            <a href="#projects">approved secondary analyses</a> take on some of them.
+          </p>
+        </div>
+        <dl class="facts">
+          <div><dt>Countries</dt><dd>23</dd></div>
+          <div><dt>Participants</dt><dd>8,000+</dd></div>
+          <div><dt>Intervention</dt><dd>Two weeks of reduced social media use</dd></div>
+          <div><dt>Data collection</dt><dd>January to September 2026</dd></div>
+        </dl>
+      </div>
+    </section>
+
     <section class="section section-tint" id="faq">
       <div class="wrap faq-wrap">
         <h2>Frequently asked questions</h2>
 
         <div class="faq-group">
-          <h3>Projects</h3>
+          <h3>About these projects</h3>
           <details>
-            <summary>My project isn't listed. What should I do?</summary>
+            <summary>Who approved these projects?</summary>
             <p>
-              If your project was already approved, <a href="#contact">email us</a> with its name and
-              the names of the people working on it. If it's a new idea, describe it at the end of the
-              forecasting survey.
+              The study's leadership team reviewed proposals from collaborators and approved the
+              projects listed on this page, checking for overlap between them.
+            </p>
+          </details>
+          <details>
+            <summary>Why don't some projects have a preregistration link yet?</summary>
+            <p>
+              Teams post their preregistrations as they finish their analysis plans. Until we've
+              received a link, the table shows "Not yet available".
+            </p>
+          </details>
+          <details>
+            <summary>When will results from these projects be available?</summary>
+            <!-- TODO: confirm embargo terms -->
+            <p>
+              After the main paper has been published. Teams hold secondary results, including
+              preprints, talks, and posts, until then to protect the Registered Report review at
+              <i>Nature</i>.
+            </p>
+          </details>
+          <details>
+            <summary>Can I get the data?</summary>
+            <p>
+              The anonymized dataset will be released publicly after the main paper is published. It
+              includes participant-level survey data from all 23 countries, a codebook describing
+              every variable, and the survey materials used in each country.
+            </p>
+          </details>
+          <details>
+            <summary>How should I cite the study?</summary>
+            <p>
+              Cite the main paper: Rathje, S., Asimovic, N., Ventura, T., et al. Testing the causal
+              impact of social media usage around the globe. <i>Nature</i> (Stage 1 in-principle
+              acceptance). We'll update this citation once the paper is published.
+            </p>
+          </details>
+        </div>
+
+        <div class="faq-group">
+          <h3>For project teams</h3>
+          <details>
+            <summary>My project is missing or its details are wrong. What should I do?</summary>
+            <p>
+              <a href="#contact">Email us</a> with the project's name and the names of the people
+              working on it, and we'll fix the table.
             </p>
           </details>
           <details>
             <summary>How do I add or update my preregistration link?</summary>
             <p>
-              Add it at the end of the forecasting survey, or <a href="#contact">email us</a> the link
-              at any time. We update the table regularly.
+              <a href="#contact">Email us</a> the link at any time. We update the table regularly.
             </p>
           </details>
           <details>
@@ -190,100 +223,8 @@
             <!-- TODO: confirm preregistration policy -->
             <p>
               It isn't required, but we strongly encourage it. Preregistering on a site like
-              <a href="https://osf.io/" target="_blank" rel="noopener">OSF</a> before you open the data makes your secondary results
-              more credible.
-            </p>
-          </details>
-          <details>
-            <summary>Can I propose a new project now?</summary>
-            <p>
-              Yes. Describe your secondary analysis at the end of the forecasting survey. If it's
-              approved, we'll add it to the <a href="#projects">table on this page</a>. Check the list
-              first so your idea doesn't overlap with an approved project.
-            </p>
-          </details>
-          <details>
-            <summary>Two projects on the list look similar. Is that a problem?</summary>
-            <p>
-              The leadership team reviewed overlap when selecting projects. If you think your work
-              overlaps with another team's, <a href="#contact">let us know</a> and we'll put you in touch.
-            </p>
-          </details>
-        </div>
-
-        <div class="faq-group">
-          <h3>The forecasting survey</h3>
-          <details>
-            <summary>Why do I have to make forecasts before I get the data?</summary>
-            <p>
-              A forecast is only informative if it's made without knowing the answer. Collecting
-              predictions from researchers across 23 countries before the results are known lets us
-              measure how well experts anticipate the effects of social media, and which effects
-              surprise them. Once you've seen the data, that's impossible to undo.
-            </p>
-          </details>
-          <details>
-            <summary>Does everyone on my project team need to take the survey?</summary>
-            <!-- TODO: confirm team policy -->
-            <p>
-              Yes. Every collaborator who will work with the data should complete the survey
-              individually, so we receive independent forecasts.
-            </p>
-          </details>
-          <details>
-            <summary>What will I be asked to predict?</summary>
-            <p>
-              How reducing social media use for two weeks affects the study's main outcomes, such as
-              polarization, intergroup attitudes, and well-being. The
-              <a href="https://osf.io/preprints/psyarxiv/ujtxa_v1" target="_blank" rel="noopener">Stage 1 protocol</a> describes the
-              outcomes if you'd like to review them first.
-            </p>
-          </details>
-          <details>
-            <summary>Do my forecasts have to be accurate?</summary>
-            <p>
-              No. There are no right or wrong answers, and your forecasts have no effect on your access
-              to the data. We want your honest best guesses.
-            </p>
-          </details>
-          <details>
-            <summary>Can I discuss my forecasts with my team before submitting?</summary>
-            <p>
-              Please don't. Forecasts should reflect your own expectations, so answer on your own without
-              comparing predictions with others.
-            </p>
-          </details>
-          <details>
-            <summary>Will my forecasts be identifiable?</summary>
-            <!-- TODO: confirm how forecasts will be reported -->
-            <p>
-              Forecasts will be analyzed and reported in aggregate. We won't publish individual
-              forecasts alongside names.
-            </p>
-          </details>
-          <details>
-            <summary>Can I change my forecasts after I submit?</summary>
-            <p>
-              No, submitted forecasts are final. If you made a mistake, such as a typo, contact us.
-            </p>
-          </details>
-        </div>
-
-        <div class="faq-group">
-          <h3>Data access and publishing</h3>
-          <details>
-            <summary>When will I receive the data?</summary>
-            <!-- TODO: add date -->
-            <p>
-              After the forecasting window closes. We'll email everyone who completed the survey with
-              download instructions.
-            </p>
-          </details>
-          <details>
-            <summary>What will the data include?</summary>
-            <p>
-              Anonymized participant-level survey data from all 23 countries, a codebook describing
-              every variable, and the survey materials used in each country.
+              <a href="https://osf.io/" target="_blank" rel="noopener">OSF</a> before you analyze the
+              data makes your secondary results more credible.
             </p>
           </details>
           <details>
@@ -296,8 +237,8 @@
           <details>
             <summary>Can I share the data with students or colleagues?</summary>
             <p>
-              Only with people working on your approved project. Don't post or redistribute the data.
-              It will be released publicly after the main paper is published.
+              Only with people working on your approved project. Don't post or redistribute the data
+              before its public release.
             </p>
           </details>
           <details>
@@ -310,11 +251,10 @@
             </p>
           </details>
           <details>
-            <summary>How should I cite the project?</summary>
+            <summary>Another project looks similar to mine. Is that a problem?</summary>
             <p>
-              Cite the main paper: Rathje, S., Asimovic, N., Ventura, T., et al. Testing the causal
-              impact of social media usage around the globe. <i>Nature</i> (Stage 1 in-principle
-              acceptance). We'll update this citation once the paper is published.
+              The leadership team reviewed overlap when approving projects. If you think your work
+              overlaps with another team's, <a href="#contact">let us know</a> and we'll put you in touch.
             </p>
           </details>
         </div>
@@ -329,7 +269,6 @@
           <a href="mailto:globalsocialmediastudy@gmail.com">globalsocialmediastudy@gmail.com</a>.
           We read every message, though it may take a few days to reply.
         </p>
-        <a class="button" href="https://example.com" data-survey-link target="_blank" rel="noopener">Take the forecasting survey</a>
       </div>
     </section>
   </main>

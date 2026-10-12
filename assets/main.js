@@ -75,6 +75,30 @@
     loaded = true;
     table.hidden = false;
     applyFilter();
+    renderStats(projects);
+  }
+
+  // Summary counts in the hero; left hidden if the list fails to load.
+  function renderStats(projects) {
+    var stats = document.getElementById("hero-stats");
+    if (!stats) return;
+    var people = {};
+    var preregistered = 0;
+    var valid = projects.filter(function (p) { return p && typeof p === "object"; });
+    valid.forEach(function (p) {
+      var names = Array.isArray(p.researchers) ? p.researchers : (p.researchers ? [p.researchers] : []);
+      names.forEach(function (name) { people[String(name).trim().toLowerCase()] = true; });
+      if (safeUrl(p.preregistration)) preregistered++;
+    });
+    var values = {
+      projects: valid.length,
+      researchers: Object.keys(people).length,
+      preregistered: preregistered
+    };
+    Array.prototype.forEach.call(stats.querySelectorAll("[data-stat]"), function (dd) {
+      dd.textContent = values[dd.getAttribute("data-stat")];
+    });
+    stats.hidden = false;
   }
 
   // Also called after loading, so a query typed while the list loads still applies.
@@ -116,62 +140,4 @@
       if (filter) filter.disabled = true;
       status.textContent = "The project list couldn't be loaded. Refresh the page, or email us for the list.";
     });
-})();
-
-// Decorative hero chart: a quantile dot plot of illustrative forecasts,
-// with an empty marker for the visitor's own forecast.
-(function () {
-  var svg = document.getElementById("forecast-plot");
-  if (!svg) return;
-
-  var NS = "http://www.w3.org/2000/svg";
-  var W = 360, H = 240;
-  var left = 16, right = W - 16, baseline = 196;
-  var n = 100, r = 5, d = 2 * r + 1;
-
-  function el(name, attrs, text) {
-    var node = document.createElementNS(NS, name);
-    for (var k in attrs) node.setAttribute(k, attrs[k]);
-    if (text) node.textContent = text;
-    svg.appendChild(node);
-    return node;
-  }
-
-  // Inverse normal CDF (Winitzki's erfinv approximation); accurate enough for a sketch.
-  function qnorm(p) {
-    var x = 2 * p - 1, a = 0.147;
-    var ln = Math.log(1 - x * x);
-    var t = 2 / (Math.PI * a) + ln / 2;
-    return Math.SQRT2 * Math.sign(x) * Math.sqrt(Math.sqrt(t * t - ln / a) - t);
-  }
-
-  var lo = -1, hi = 1;
-  function xScale(v) { return left + ((v - lo) / (hi - lo)) * (right - left); }
-
-  var cols = {};
-  for (var i = 0; i < n; i++) {
-    var v = 0.12 + 0.25 * qnorm((i + 0.5) / n);
-    var col = Math.round((xScale(v) - left) / d);
-    cols[col] = (cols[col] || 0) + 1;
-    el("circle", {
-      class: "plot-dot",
-      cx: left + col * d,
-      cy: baseline - r - 2 - (cols[col] - 1) * d,
-      r: r
-    });
-  }
-
-  el("line", { class: "plot-axis", x1: left - 6, x2: right + 6, y1: baseline, y2: baseline });
-  [[-1, "−1"], [0, "0"], [1, "1"]].forEach(function (t) {
-    var x = xScale(t[0]);
-    el("line", { class: "plot-axis", x1: x, x2: x, y1: baseline, y2: baseline + 5 });
-    el("text", { class: "plot-label", x: x, y: baseline + 18, "text-anchor": "middle" }, t[1]);
-  });
-  el("text", { class: "plot-label", x: W / 2, y: H - 4, "text-anchor": "middle" },
-    "Predicted effect of reducing social media use");
-
-  var youX = xScale(-0.72);
-  el("line", { class: "plot-you", x1: youX, x2: youX, y1: 46, y2: baseline });
-  el("circle", { class: "plot-you-dot", cx: youX, cy: baseline - r - 2, r: r });
-  el("text", { class: "plot-you-label", x: youX, y: 36, "text-anchor": "middle" }, "Your forecast?");
 })();
