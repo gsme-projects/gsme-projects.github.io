@@ -275,7 +275,8 @@ a:hover {
   border-top: 2px solid var(--navy-soft);
 }
 
-.hero-stats[hidden] {
+.hero-stats[hidden],
+.hero-stats div[hidden] {
   display: none;
 }
 
@@ -515,9 +516,10 @@ a:hover {
   padding-right: 0;
 }
 
-.projects th:nth-child(1) { width: 26%; }
-.projects th:nth-child(2) { width: 18%; }
-.projects th:nth-child(4) { width: 11rem; }
+.projects th:nth-child(1) { width: 22%; }
+.projects th:nth-child(2) { width: 16%; }
+.projects th:nth-child(4) { width: 10.5rem; }
+.projects th:nth-child(5) { width: 8.5rem; }
 
 .project-title {
   font-family: var(--serif);
@@ -531,7 +533,7 @@ a:hover {
   max-width: 42rem;
 }
 
-.project-prereg {
+.project-link {
   white-space: nowrap;
 }
 
@@ -544,7 +546,8 @@ a:hover {
   font-style: italic;
 }
 
-@media (max-width: 44rem) {
+/* Below this width the five columns get too narrow, so each project becomes a card */
+@media (max-width: 64rem) {
   .projects thead {
     position: absolute;
     width: 1px;
@@ -567,8 +570,14 @@ a:hover {
     border: 0;
     padding: 0 0 0.5rem;
   }
-  .project-prereg {
+  .project-link {
     white-space: normal;
+  }
+  .project-link::before {
+    content: attr(data-label) ": ";
+    font-weight: 700;
+    font-size: 0.92rem;
+    color: var(--ink-soft);
   }
 }
 

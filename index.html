@@ -38,18 +38,20 @@
           <p class="lede">
             Researchers in the Global Social Media Experiment are using its 23-country dataset to
             answer questions beyond the main paper. This page lists every secondary analysis approved
-            by the leadership team, the researchers working on it, and its preregistration.
+            by the leadership team, the researchers working on it, and links to its preregistration
+            and paper as they become available.
           </p>
           <div class="hero-actions">
             <a class="button" href="#projects">Browse projects</a>
             <a class="button button-ghost" href="#about">About the study</a>
           </div>
         </div>
-        <!-- Filled in by assets/main.js from data/projects.json -->
+        <!-- Filled in by assets/main.js from data/projects.json; counts of zero are hidden -->
         <dl class="hero-stats" id="hero-stats" hidden>
           <div><dt>Approved projects</dt><dd data-stat="projects"></dd></div>
           <div><dt>Researchers</dt><dd data-stat="researchers"></dd></div>
           <div><dt>Preregistrations posted</dt><dd data-stat="preregistered"></dd></div>
+          <div><dt>Papers and preprints</dt><dd data-stat="papers"></dd></div>
         </dl>
       </div>
     </section>
@@ -60,8 +62,8 @@
           <div>
             <h2>Approved projects</h2>
             <p class="section-intro">
-              Every secondary analysis approved by the leadership team, with a link to its
-              preregistration once the team has posted it.
+              Every secondary analysis approved by the leadership team, with links to its
+              preregistration and paper once they're available.
             </p>
           </div>
           <div class="filter">
@@ -84,6 +86,7 @@
                 <th scope="col">Researchers</th>
                 <th scope="col">Description</th>
                 <th scope="col">Preregistration</th>
+                <th scope="col">Paper</th>
               </tr>
             </thead>
             <tbody></tbody>
@@ -108,19 +111,18 @@
           </li>
           <li class="step">
             <h3>Preregistered</h3>
-            <!-- TODO: confirm preregistration policy -->
             <p>
-              We encourage every team to record its hypotheses and analysis plan in a public
+              We strongly encourage every team to record its hypotheses and analysis plan in a public
               preregistration, for example on <a href="https://osf.io/" target="_blank" rel="noopener">OSF</a>,
               before analyzing the data. We add the link to the <a href="#projects">table</a> once it's posted.
             </p>
           </li>
           <li class="step">
             <h3>Published</h3>
-            <!-- TODO: confirm embargo terms -->
             <p>
               Teams share their results publicly after the main paper is published in <i>Nature</i>,
-              which protects the Registered Report review.
+              which protects the Registered Report review. We link each paper or preprint in the
+              <a href="#projects">table</a> once the team sends it to us.
             </p>
           </li>
         </ol>
@@ -170,35 +172,37 @@
             </p>
           </details>
           <details>
-            <summary>Why don't some projects have a preregistration link yet?</summary>
+            <summary>Why don't some projects have a preregistration or paper link yet?</summary>
             <p>
-              Teams post their preregistrations as they finish their analysis plans. Until we've
-              received a link, the table shows "Not yet available".
+              Teams post their preregistrations as they finish their analysis plans, and their papers
+              after the main paper is published. Until we've received a link, the table shows
+              "Not yet available".
             </p>
           </details>
           <details>
             <summary>When will results from these projects be available?</summary>
-            <!-- TODO: confirm embargo terms -->
             <p>
               After the main paper has been published. Teams hold secondary results, including
               preprints, talks, and posts, until then to protect the Registered Report review at
-              <i>Nature</i>.
+              <i>Nature</i>. We'll link each paper or preprint in the <a href="#projects">table</a>.
             </p>
           </details>
           <details>
             <summary>Can I get the data?</summary>
             <p>
-              The anonymized dataset will be released publicly after the main paper is published. It
-              includes participant-level survey data from all 23 countries, a codebook describing
-              every variable, and the survey materials used in each country.
+              We'll share more details about the data release later.
             </p>
           </details>
           <details>
             <summary>How should I cite the study?</summary>
             <p>
-              Cite the main paper: Rathje, S., Asimovic, N., Ventura, T., et al. Testing the causal
-              impact of social media usage around the globe. <i>Nature</i> (Stage 1 in-principle
-              acceptance). We'll update this citation once the paper is published.
+              Cite the Stage 1 Registered Report: Rathje, S.*, Asimovic, N.*, Ventura, T.*, Mughal, S.,
+              Karsting, H., Barrie, C., DeVerna, M., Robertson, C. E., The Global Social Media
+              Experiment Team, Tucker, J. A., &amp; Van Bavel, J. J. (Stage 1 In Principle Acceptance of
+              Registered Report). Testing the causal impact of social media usage around the globe.
+              <i>Nature</i>. *Co-first authors. The
+              <a href="https://osf.io/preprints/psyarxiv/ujtxa_v1" target="_blank" rel="noopener">preprint</a>
+              is available on PsyArXiv. We'll update this citation once the paper is published.
             </p>
           </details>
         </div>
@@ -213,14 +217,14 @@
             </p>
           </details>
           <details>
-            <summary>How do I add or update my preregistration link?</summary>
+            <summary>How do I add my preregistration, preprint, or paper?</summary>
             <p>
-              <a href="#contact">Email us</a> the link at any time. We update the table regularly.
+              <a href="#contact">Email the leadership team</a> the link and we'll add it to the table.
+              The same goes for updating a link you've already sent.
             </p>
           </details>
           <details>
             <summary>Do I need a preregistration?</summary>
-            <!-- TODO: confirm preregistration policy -->
             <p>
               It isn't required, but we strongly encourage it. Preregistering on a site like
               <a href="https://osf.io/" target="_blank" rel="noopener">OSF</a> before you analyze the
@@ -237,13 +241,11 @@
           <details>
             <summary>Can I share the data with students or colleagues?</summary>
             <p>
-              Only with people working on your approved project. Don't post or redistribute the data
-              before its public release.
+              Only with people working on your approved project. Don't post or redistribute the data.
             </p>
           </details>
           <details>
             <summary>When can I publish or present my results?</summary>
-            <!-- TODO: confirm embargo terms -->
             <p>
               Please wait until the main paper has been published before sharing secondary results
               publicly, including preprints, talks, and posts. This protects the Registered Report

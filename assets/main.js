@@ -32,6 +32,30 @@
     });
   }
 
+  function renderLink(td, url, label, title) {
+    url = safeUrl(url);
+    if (url) {
+      var a = document.createElement("a");
+      a.href = url;
+      a.target = "_blank";
+      a.rel = "noopener";
+      a.textContent = label;
+      // Extra context for screen readers; the name still starts with the visible text.
+      if (title) {
+        var context = document.createElement("span");
+        context.className = "visually-hidden";
+        context.textContent = " for " + title;
+        a.appendChild(context);
+      }
+      td.appendChild(a);
+    } else {
+      var span = document.createElement("span");
+      span.className = "muted";
+      span.textContent = "Not yet available";
+      td.appendChild(span);
+    }
+  }
+
   function render(projects) {
     if (!Array.isArray(projects)) throw new Error("projects.json must be an array");
     projects.forEach(function (p, i) {
@@ -46,28 +70,8 @@
       renderPeople(cell(tr, "Researchers", "project-people"), names);
       cell(tr, "Description").textContent = p.description || "";
 
-      var prereg = cell(tr, "Preregistration", "project-prereg");
-      var url = safeUrl(p.preregistration);
-      if (url) {
-        var a = document.createElement("a");
-        a.href = url;
-        a.target = "_blank";
-        a.rel = "noopener";
-        a.textContent = "View preregistration";
-        // Extra context for screen readers; the name still starts with the visible text.
-        if (p.title) {
-          var context = document.createElement("span");
-          context.className = "visually-hidden";
-          context.textContent = " for " + p.title;
-          a.appendChild(context);
-        }
-        prereg.appendChild(a);
-      } else {
-        var span = document.createElement("span");
-        span.className = "muted";
-        span.textContent = "Not yet available";
-        prereg.appendChild(span);
-      }
+      renderLink(cell(tr, "Preregistration", "project-link"), p.preregistration, "View preregistration", p.title);
+      renderLink(cell(tr, "Paper", "project-link"), p.paper, "Read paper", p.title);
 
       tbody.appendChild(tr);
       rows.push({ tr: tr, text: [p.title, people, p.description].join(" ").toLowerCase() });
@@ -78,27 +82,35 @@
     renderStats(projects);
   }
 
-  // Summary counts in the hero; left hidden if the list fails to load.
+  // Summary counts in the hero; a count of zero is hidden, and the whole list stays
+  // hidden if the projects fail to load.
   function renderStats(projects) {
     var stats = document.getElementById("hero-stats");
     if (!stats) return;
     var people = {};
     var preregistered = 0;
+    var papers = 0;
     var valid = projects.filter(function (p) { return p && typeof p === "object"; });
     valid.forEach(function (p) {
       var names = Array.isArray(p.researchers) ? p.researchers : (p.researchers ? [p.researchers] : []);
       names.forEach(function (name) { people[String(name).trim().toLowerCase()] = true; });
       if (safeUrl(p.preregistration)) preregistered++;
+      if (safeUrl(p.paper)) papers++;
     });
     var values = {
       projects: valid.length,
       researchers: Object.keys(people).length,
-      preregistered: preregistered
+      preregistered: preregistered,
+      papers: papers
     };
+    var shown = 0;
     Array.prototype.forEach.call(stats.querySelectorAll("[data-stat]"), function (dd) {
-      dd.textContent = values[dd.getAttribute("data-stat")];
+      var value = values[dd.getAttribute("data-stat")];
+      dd.textContent = value;
+      dd.parentNode.hidden = !value;
+      if (value) shown++;
     });
-    stats.hidden = false;
+    stats.hidden = shown === 0;
   }
 
   // Also called after loading, so a query typed while the list loads still applies.
