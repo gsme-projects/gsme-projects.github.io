@@ -3,13 +3,15 @@
   var table = document.getElementById("projects-table");
   var status = document.getElementById("projects-status");
   var filter = document.getElementById("project-filter");
-  if (!table) return;
+  if (!table || !status) return;
   var tbody = table.querySelector("tbody");
   var rows = [];
   var loaded = false;
 
   function cell(tr, label, className) {
     var td = document.createElement("td");
+    // Explicit role, because the card layout's display:block drops table semantics in Safari.
+    td.setAttribute("role", "cell");
     td.setAttribute("data-label", label);
     if (className) td.className = className;
     tr.appendChild(td);
@@ -21,11 +23,12 @@
     return /^https?:\/\//i.test(url) ? url : "";
   }
 
-  // Sets text, keeping hyphenated words like "well-being" on one line.
+  // Sets text, keeping short hyphenated words like "well-being" on one line. Longer
+  // ones (slugs, URL fragments) are left free to wrap so they can't overflow a phone screen.
   function setText(el, text) {
-    String(text || "").split(/(\S*\w-\w\S*)/).forEach(function (part, i) {
+    String(text || "").split(/([\p{L}\p{N}]+(?:-[\p{L}\p{N}]+)+)/u).forEach(function (part, i) {
       if (!part) return;
-      if (i % 2) {
+      if (i % 2 && part.length <= 20) {
         var span = document.createElement("span");
         span.className = "nowrap";
         span.textContent = part;
@@ -47,8 +50,16 @@
     });
   }
 
+  // Researcher names as trimmed, non-empty strings; accepts a list or a single name.
+  function researcherNames(p) {
+    var names = Array.isArray(p.researchers) ? p.researchers : [p.researchers];
+    return names
+      .filter(function (name) { return typeof name === "string" && name.trim(); })
+      .map(function (name) { return name.trim(); });
+  }
+
+  // `url` must already have passed safeUrl.
   function renderLink(td, url, label, title) {
-    url = safeUrl(url);
     if (url) {
       var a = document.createElement("a");
       a.href = url;
@@ -71,53 +82,47 @@
     }
   }
 
+  // Builds the table and returns the counts shown in the hero.
   function render(projects) {
     if (!Array.isArray(projects)) throw new Error("projects.json must be an array");
+    var counts = { projects: 0, researchers: 0, preregistered: 0, papers: 0 };
+    var people = {};
     projects.forEach(function (p, i) {
       if (!p || typeof p !== "object") {
         console.warn("Skipping invalid entry " + i + " in projects.json:", p);
         return;
       }
       var tr = document.createElement("tr");
-      var names = Array.isArray(p.researchers) ? p.researchers : (p.researchers ? [p.researchers] : []);
-      var people = names.join(", ");
+      tr.setAttribute("role", "row");
+      var names = researcherNames(p);
+      var prereg = safeUrl(p.preregistration);
+      var paper = safeUrl(p.paper);
       setText(cell(tr, "Project", "project-title"), p.title);
       renderPeople(cell(tr, "Researchers", "project-people"), names);
       setText(cell(tr, "Description"), p.description);
-
-      renderLink(cell(tr, "Preregistration", "project-link"), p.preregistration, "View preregistration", p.title);
-      renderLink(cell(tr, "Paper", "project-link"), p.paper, "Read paper", p.title);
+      renderLink(cell(tr, "Preregistration", "project-link"), prereg, "View preregistration", p.title);
+      renderLink(cell(tr, "Paper", "project-link"), paper, "Read paper", p.title);
 
       tbody.appendChild(tr);
-      rows.push({ tr: tr, text: [p.title, people, p.description].join(" ").toLowerCase() });
+      rows.push({ tr: tr, text: [p.title, names.join(", "), p.description].join(" ").toLowerCase() });
+
+      counts.projects++;
+      names.forEach(function (name) { people[name.toLowerCase()] = true; });
+      if (prereg) counts.preregistered++;
+      if (paper) counts.papers++;
     });
+    counts.researchers = Object.keys(people).length;
     loaded = true;
     table.hidden = false;
     applyFilter();
-    renderStats(projects);
+    return counts;
   }
 
-  // Summary counts in the hero; a count of zero is hidden, and the whole list stays
+  // Summary counts in the hero. A count of zero is hidden, and the whole list stays
   // hidden if the projects fail to load.
-  function renderStats(projects) {
+  function renderStats(values) {
     var stats = document.getElementById("hero-stats");
     if (!stats) return;
-    var people = {};
-    var preregistered = 0;
-    var papers = 0;
-    var valid = projects.filter(function (p) { return p && typeof p === "object"; });
-    valid.forEach(function (p) {
-      var names = Array.isArray(p.researchers) ? p.researchers : (p.researchers ? [p.researchers] : []);
-      names.forEach(function (name) { people[String(name).trim().toLowerCase()] = true; });
-      if (safeUrl(p.preregistration)) preregistered++;
-      if (safeUrl(p.paper)) papers++;
-    });
-    var values = {
-      projects: valid.length,
-      researchers: Object.keys(people).length,
-      preregistered: preregistered,
-      papers: papers
-    };
     var shown = 0;
     Array.prototype.forEach.call(stats.querySelectorAll("[data-stat]"), function (dd) {
       var value = values[dd.getAttribute("data-stat")];
@@ -157,7 +162,16 @@
       if (!res.ok) throw new Error(res.status);
       return res.json();
     })
-    .then(render)
+    .then(function (projects) {
+      var counts = render(projects);
+      // Kept apart from the load-failure handler below, so a problem with the counts
+      // can't hide a table that loaded fine.
+      try {
+        renderStats(counts);
+      } catch (err) {
+        console.error(err);
+      }
+    })
     .catch(function (err) {
       console.error(err);
       loaded = false;

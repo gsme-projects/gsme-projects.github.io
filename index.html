@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Secondary Analyses | Global Social Media Experiment</title>
-  <meta name="description" content="Approved secondary analysis projects for the Global Social Media Experiment, with the researchers on each project and links to their preregistrations.">
+  <meta name="description" content="Approved secondary analysis projects for the Global Social Media Experiment, with the researchers on each project and links to their preregistrations and papers.">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -79,17 +79,18 @@
           </p>
         </noscript>
         <div class="table-wrap">
-          <table class="projects" id="projects-table" hidden>
-            <thead>
-              <tr>
-                <th scope="col">Project</th>
-                <th scope="col">Researchers</th>
-                <th scope="col">Description</th>
-                <th scope="col">Preregistration</th>
-                <th scope="col">Paper</th>
+          <!-- Explicit roles, because the card layout's display:block drops table semantics in Safari -->
+          <table class="projects" id="projects-table" role="table" hidden>
+            <thead role="rowgroup">
+              <tr role="row">
+                <th scope="col" role="columnheader">Project</th>
+                <th scope="col" role="columnheader">Researchers</th>
+                <th scope="col" role="columnheader">Description</th>
+                <th scope="col" role="columnheader">Preregistration</th>
+                <th scope="col" role="columnheader">Paper</th>
               </tr>
             </thead>
-            <tbody></tbody>
+            <tbody role="rowgroup"></tbody>
           </table>
         </div>
       </div>

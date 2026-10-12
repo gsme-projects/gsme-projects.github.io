@@ -244,7 +244,7 @@ a:hover {
   }
 }
 
-/* On phones the hero buttons stack at full width */
+/* On phones the hero buttons stretch to fill the row, stacking when they don't fit */
 @media (max-width: 36rem) {
   .hero-actions .button {
     flex: 1 1 12rem;
@@ -272,6 +272,11 @@ a:hover {
   grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
   gap: clamp(2rem, 5vw, 4rem);
   align-items: center;
+}
+
+/* No stats to show (still loading, failed, or all zero): give the copy the full width */
+.hero-inner:has(> .hero-stats[hidden]) {
+  grid-template-columns: minmax(0, 1fr);
 }
 
 .hero h1 {
@@ -577,7 +582,7 @@ a:hover {
 }
 
 /* Below this width the five columns get too narrow, so each project becomes a card */
-@media (max-width: 64rem) {
+@media (max-width: 60rem) {
   .projects thead {
     position: absolute;
     width: 1px;
@@ -603,8 +608,11 @@ a:hover {
   .project-link {
     white-space: normal;
   }
+  /* The column header already names the cell for screen readers, so the visual label
+     uses empty alt text; browsers without alt-text support use the first line */
   .project-link::before {
     content: attr(data-label) ": ";
+    content: attr(data-label) ": " / "";
     font-weight: 700;
     font-size: 0.92rem;
     color: var(--ink-soft);
