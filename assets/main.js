@@ -21,6 +21,21 @@
     return /^https?:\/\//i.test(url) ? url : "";
   }
 
+  // Sets text, keeping hyphenated words like "well-being" on one line.
+  function setText(el, text) {
+    String(text || "").split(/(\S*\w-\w\S*)/).forEach(function (part, i) {
+      if (!part) return;
+      if (i % 2) {
+        var span = document.createElement("span");
+        span.className = "nowrap";
+        span.textContent = part;
+        el.appendChild(span);
+      } else {
+        el.appendChild(document.createTextNode(part));
+      }
+    });
+  }
+
   // Lists names separated by commas, keeping each name on one line.
   function renderPeople(td, names) {
     names.forEach(function (name, i) {
@@ -66,9 +81,9 @@
       var tr = document.createElement("tr");
       var names = Array.isArray(p.researchers) ? p.researchers : (p.researchers ? [p.researchers] : []);
       var people = names.join(", ");
-      cell(tr, "Project", "project-title").textContent = p.title || "";
+      setText(cell(tr, "Project", "project-title"), p.title);
       renderPeople(cell(tr, "Researchers", "project-people"), names);
-      cell(tr, "Description").textContent = p.description || "";
+      setText(cell(tr, "Description"), p.description);
 
       renderLink(cell(tr, "Preregistration", "project-link"), p.preregistration, "View preregistration", p.title);
       renderLink(cell(tr, "Paper", "project-link"), p.paper, "Read paper", p.title);

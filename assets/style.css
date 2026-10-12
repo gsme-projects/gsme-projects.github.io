@@ -56,6 +56,7 @@ body {
   font-family: var(--sans);
   font-size: 1.0625rem;
   line-height: 1.6;
+  overflow-wrap: break-word;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -66,6 +67,20 @@ h3 {
   font-weight: 600;
   line-height: 1.2;
   margin: 0 0 0.75em;
+  text-wrap: balance;
+}
+
+/* Avoid a single word stranded on the last line */
+p,
+dd,
+summary,
+.projects td {
+  text-wrap: pretty;
+}
+
+/* Keeps hyphenated words from splitting across lines */
+.nowrap {
+  white-space: nowrap;
 }
 
 h2 {
@@ -229,6 +244,14 @@ a:hover {
   }
 }
 
+/* On phones the hero buttons stack at full width */
+@media (max-width: 36rem) {
+  .hero-actions .button {
+    flex: 1 1 12rem;
+    text-align: center;
+  }
+}
+
 @media (max-width: 26rem) {
   .brand {
     font-size: 0.95rem;
@@ -368,6 +391,13 @@ a:hover {
   margin: 0;
   font-family: var(--serif);
   font-weight: 600;
+}
+
+@media (max-width: 36rem) {
+  .facts div {
+    grid-template-columns: 7.25rem 1fr;
+    gap: 0.75rem;
+  }
 }
 
 /* Steps */
