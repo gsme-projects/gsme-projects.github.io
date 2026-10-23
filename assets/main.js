@@ -3,6 +3,7 @@
   var table = document.getElementById("projects-table");
   var status = document.getElementById("projects-status");
   var filter = document.getElementById("project-filter");
+  var filterLabel = document.querySelector("label[for=project-filter]");
   if (!table || !status) return;
   var tbody = table.querySelector("tbody");
   var rows = [];
@@ -143,6 +144,9 @@
     });
     loaded = true;
     table.hidden = false;
+    if (filterLabel && rows.length) {
+      filterLabel.textContent = "Search " + rows.length + (rows.length === 1 ? " project" : " projects");
+    }
     applyFilter();
     return counts;
   }
@@ -181,7 +185,8 @@
     if (total === 0) {
       status.textContent = "No projects have been listed yet.";
     } else if (shown === total) {
-      status.textContent = total + (total === 1 ? " project" : " projects");
+      // The search label already gives the total.
+      status.textContent = "";
     } else if (shown === 0) {
       status.textContent = "No projects match your search. Try a different word, or clear the search to see all " + total + ".";
     } else {

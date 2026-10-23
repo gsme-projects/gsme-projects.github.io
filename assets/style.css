@@ -6,7 +6,6 @@
   --ink-faint: #6a707e;
   --line: #e2dccf;
   --row-hover: rgba(44, 107, 102, 0.05);
-  --button-hover: rgba(44, 107, 102, 0.06);
   /* Header, hero, and footer */
   --banner: var(--tint);
   --banner-ink: var(--ink);
@@ -33,7 +32,6 @@
     --ink-faint: #8591a8;
     --line: #2b3a5a;
     --row-hover: rgba(255, 255, 255, 0.03);
-    --button-hover: rgba(255, 255, 255, 0.08);
     --banner: #0b1222;
     --banner-ink: #e9eef7;
     --banner-soft: #a9b6cf;
@@ -174,16 +172,6 @@ a:hover {
 .button-big {
   font-size: 1.2rem;
   padding: 1.05rem 1.9rem;
-}
-
-.button-ghost {
-  background: transparent;
-  color: var(--accent);
-}
-
-.button-ghost:hover {
-  background: var(--button-hover);
-  color: var(--accent-hover);
 }
 
 /* Header */
@@ -425,6 +413,11 @@ a:hover {
   color: var(--ink-soft);
   font-size: 0.95rem;
   margin-bottom: 0.75rem;
+}
+
+/* Kept in the page for screen reader announcements, but takes no space when empty */
+.projects-status:empty {
+  margin: 0;
 }
 
 .projects[hidden],
