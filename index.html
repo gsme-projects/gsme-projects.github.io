@@ -3,9 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Secondary Analyses | Global Social Media Experiment</title>
+  <title>GSME Secondary analyses</title>
   <meta name="description" content="Approved secondary analysis projects for the Global Social Media Experiment, with the researchers on each project and links to their preregistrations and papers.">
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="assets/favicon-192.png" sizes="192x192" type="image/png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Literata:opsz,wght@7..72,400;7..72,600&display=swap" rel="stylesheet">
@@ -17,12 +19,10 @@
 
   <header class="site-header">
     <div class="wrap header-inner">
-      <a class="brand" href="#top">Global Social Media Experiment</a>
+      <a class="brand" href="#top">GSME Secondary analyses</a>
       <nav aria-label="Sections">
         <ul class="nav-list">
           <li><a href="#projects">Projects</a></li>
-          <li><a href="#process">Process</a></li>
-          <li><a href="#about">The study</a></li>
           <li><a href="#faq">FAQ</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
@@ -32,27 +32,26 @@
 
   <main id="main">
     <section class="hero" id="top">
-      <div class="wrap hero-inner">
-        <div class="hero-copy">
+      <div class="wrap">
+        <div class="hero-head">
           <h1>Approved secondary analyses</h1>
           <p class="lede">
-            Researchers in the Global Social Media Experiment are using its <span class="nowrap">23-country</span> dataset to
+            Researchers in the Global Social Media Experiment are using its <span class="nowrap">26-country</span> dataset to
             answer questions beyond the main paper. This page lists every secondary analysis approved
             by the leadership team, the researchers working on it, and links to its preregistration
             and paper as they become available.
           </p>
-          <div class="hero-actions">
-            <a class="button" href="#projects">Browse projects</a>
-            <a class="button button-ghost" href="#about">About the study</a>
-          </div>
         </div>
-        <!-- Filled in by assets/main.js from data/projects.json; counts of zero are hidden -->
+        <!-- Filled in by assets/main.js from data/projects.json; counts of zero are hidden.
+             data-one is the label used when the count is 1. -->
         <dl class="hero-stats" id="hero-stats" hidden>
-          <div><dt>Approved projects</dt><dd data-stat="projects"></dd></div>
-          <div><dt>Researchers</dt><dd data-stat="researchers"></dd></div>
-          <div><dt>Preregistrations posted</dt><dd data-stat="preregistered"></dd></div>
-          <div><dt>Papers and preprints</dt><dd data-stat="papers"></dd></div>
+          <div><dt data-one="preregistration posted">preregistrations posted</dt><dd data-stat="preregistered"></dd></div>
+          <div><dt data-one="paper or preprint">papers and preprints</dt><dd data-stat="papers"></dd></div>
         </dl>
+        <div class="hero-actions">
+          <a class="button button-big" href="https://globalsocialmediastudy.com/" target="_blank" rel="noopener">About the study</a>
+          <a class="button button-ghost button-big" href="#projects">Browse projects</a>
+        </div>
       </div>
     </section>
 
@@ -62,8 +61,7 @@
           <div>
             <h2>Approved projects</h2>
             <p class="section-intro">
-              Every secondary analysis approved by the leadership team, with links to its
-              preregistration and paper once they're available.
+              Every secondary analysis approved by the leadership team.
             </p>
           </div>
           <div class="filter">
@@ -88,6 +86,7 @@
                 <th scope="col" role="columnheader">Description</th>
                 <th scope="col" role="columnheader">Preregistration</th>
                 <th scope="col" role="columnheader">Paper</th>
+                <th scope="col" role="columnheader">Corresponding author</th>
               </tr>
             </thead>
             <tbody role="rowgroup"></tbody>
@@ -96,68 +95,6 @@
       </div>
     </section>
 
-    <section class="section section-tint" id="process">
-      <div class="wrap">
-        <h2>From approval to publication</h2>
-        <p class="section-intro">
-          How a project moves from approval to published results.
-        </p>
-        <ol class="steps">
-          <li class="step">
-            <h3>Approved</h3>
-            <p>
-              The leadership team reviewed proposed secondary analyses and approved the projects
-              listed here, checking for overlap between them.
-            </p>
-          </li>
-          <li class="step">
-            <h3>Preregistered</h3>
-            <p>
-              We strongly encourage every team to record its hypotheses and analysis plan in a public
-              preregistration, for example on <a href="https://osf.io/" target="_blank" rel="noopener">OSF</a>,
-              before analyzing the data. We add the link to the <a href="#projects">table</a> once it's posted.
-            </p>
-          </li>
-          <li class="step">
-            <h3>Published</h3>
-            <p>
-              Teams share their results publicly after the main paper is published in <i>Nature</i>,
-              which protects the Registered Report review. We link each paper or preprint in the
-              <a href="#projects">table</a> once the team sends it to us.
-            </p>
-          </li>
-        </ol>
-      </div>
-    </section>
-
-    <section class="section" id="about">
-      <div class="wrap two-col">
-        <div class="col-main">
-          <h2>About the study</h2>
-          <p>
-            The <a href="https://globalsocialmediastudy.com/" target="_blank" rel="noopener">Global Social Media Experiment</a> tests
-            the causal effects of social media use around the world. Participants in 23 countries were
-            paid to cut back their social media <span class="nowrap">screen-time</span> for two weeks. We then measured how this
-            changed their polarization, intergroup attitudes, <span class="nowrap">well-being</span>, news knowledge, and exposure
-            to online hostility.
-          </p>
-          <p>
-            The main analyses are preregistered as a
-            <a href="https://www.nature.com/nature/for-authors/registered-reports" target="_blank" rel="noopener">Registered Report</a>
-            that received <span class="nowrap">in-principle</span> acceptance at <i>Nature</i>, and the
-            <a href="https://osf.io/preprints/psyarxiv/ujtxa_v1" target="_blank" rel="noopener">Stage 1 protocol</a> describes the
-            design in full. The dataset can answer many questions beyond the main paper, and the
-            <a href="#projects">approved secondary analyses</a> take on some of them.
-          </p>
-        </div>
-        <dl class="facts">
-          <div><dt>Countries</dt><dd>23</dd></div>
-          <div><dt>Participants</dt><dd>8,000+</dd></div>
-          <div><dt>Intervention</dt><dd>Two weeks of reduced social media use</dd></div>
-          <div><dt>Data collection</dt><dd>January to September 2026</dd></div>
-        </dl>
-      </div>
-    </section>
 
     <section class="section section-tint" id="faq">
       <div class="wrap faq-wrap">
@@ -169,7 +106,7 @@
             <summary>Who approved these projects?</summary>
             <p>
               The study's leadership team reviewed proposals from collaborators and approved the
-              projects listed on this page, checking for overlap between them.
+              projects listed on this page, checking primarily for completeness.
             </p>
           </details>
           <details>
@@ -177,7 +114,7 @@
             <p>
               Teams post their preregistrations as they finish their analysis plans, and their papers
               after the main paper is published. Until we've received a link, the table shows
-              "Not yet available".
+              a dash (—).
             </p>
           </details>
           <details>
@@ -191,7 +128,9 @@
           <details>
             <summary>Can I get the data?</summary>
             <p>
-              We'll share more details about the data release later.
+              We will aim to make the data publicly available, along with a paper detailing its data
+              structure, in 2027. Collaborators who worked on the GSME will receive access to the data
+              before we release it publicly.
             </p>
           </details>
           <details>
@@ -209,34 +148,35 @@
         </div>
 
         <div class="faq-group">
-          <h3>For project teams</h3>
+          <h3>For GSME Collaborators</h3>
           <details>
-            <summary>My project is missing or its details are wrong. What should I do?</summary>
+            <summary>I am a collaborator for the GSME. Where can I read the full details about the procedure for getting early data access?</summary>
             <p>
-              <a href="#contact">Email us</a> with the project's name and the names of the people
-              working on it, and we'll fix the table.
+              The full procedure is in the Manual for Country Teams, which can be found in the shared
+              folder "GSME - Public Docs."
             </p>
           </details>
           <details>
-            <summary>How do I add my preregistration, preprint, or paper?</summary>
+            <summary>My project is missing. What should I do?</summary>
             <p>
-              <a href="#contact">Email the leadership team</a> the link and we'll add it to the table.
-              The same goes for updating a link you've already sent.
+              If it has been 10 days since you submitted your materials and they are still not on the
+              site, please email us at
+              <a href="mailto:globalsocialmediastudy@gmail.com">globalsocialmediastudy@gmail.com</a>.
+            </p>
+          </details>
+          <details>
+            <summary>How do I add my project?</summary>
+            <p>
+              We shared a protocol for this with all GSME collaborators. If you did not receive it,
+              please double-check your email and check in with your team leader.
             </p>
           </details>
           <details>
             <summary>Do I need a preregistration?</summary>
             <p>
-              It isn't required, but we strongly encourage it. Preregistering on a site like
-              <a href="https://osf.io/" target="_blank" rel="noopener">OSF</a> before you analyze the
-              data makes your secondary results more credible.
-            </p>
-          </details>
-          <details>
-            <summary>Can I use the data for analyses beyond my approved project?</summary>
-            <p>
-              Please use it only for your approved project. If you'd like to try something else,
-              <a href="#contact">email the leadership team</a> first so we can avoid overlap with other teams.
+              To receive early access to the global data, you need a preregistration. After our main
+              paper is published, we will make the dataset publicly available, and no preregistration
+              will be required.
             </p>
           </details>
           <details>

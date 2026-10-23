@@ -39,6 +39,12 @@
     });
   }
 
+  function safeEmail(email) {
+    email = typeof email === "string" ? email.trim() : "";
+    // One plain address: no extra recipients or mailto parameters.
+    return /^[A-Za-z0-9._+-]+@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)+$/.test(email) ? email : "";
+  }
+
   // Lists names separated by commas, keeping each name on one line.
   function renderPeople(td, names) {
     names.forEach(function (name, i) {
@@ -58,6 +64,34 @@
       .map(function (name) { return name.trim(); });
   }
 
+  // A quiet dash for sighted readers; screen readers hear "Not yet available".
+  function renderEmpty(td) {
+    var dash = document.createElement("span");
+    dash.className = "empty";
+    dash.setAttribute("aria-hidden", "true");
+    dash.textContent = "—";
+    var text = document.createElement("span");
+    text.className = "visually-hidden";
+    text.textContent = "Not yet available";
+    td.appendChild(dash);
+    td.appendChild(text);
+  }
+
+  function renderEmail(td, email) {
+    if (email) {
+      var a = document.createElement("a");
+      a.href = "mailto:" + email;
+      // Prefer breaking a long address after the "@".
+      var at = email.lastIndexOf("@") + 1;
+      a.appendChild(document.createTextNode(email.slice(0, at)));
+      a.appendChild(document.createElement("wbr"));
+      a.appendChild(document.createTextNode(email.slice(at)));
+      td.appendChild(a);
+    } else {
+      renderEmpty(td);
+    }
+  }
+
   // `url` must already have passed safeUrl.
   function renderLink(td, url, label, title) {
     if (url) {
@@ -75,18 +109,14 @@
       }
       td.appendChild(a);
     } else {
-      var span = document.createElement("span");
-      span.className = "muted";
-      span.textContent = "Not yet available";
-      td.appendChild(span);
+      renderEmpty(td);
     }
   }
 
   // Builds the table and returns the counts shown in the hero.
   function render(projects) {
     if (!Array.isArray(projects)) throw new Error("projects.json must be an array");
-    var counts = { projects: 0, researchers: 0, preregistered: 0, papers: 0 };
-    var people = {};
+    var counts = { preregistered: 0, papers: 0 };
     projects.forEach(function (p, i) {
       if (!p || typeof p !== "object") {
         console.warn("Skipping invalid entry " + i + " in projects.json:", p);
@@ -97,21 +127,20 @@
       var names = researcherNames(p);
       var prereg = safeUrl(p.preregistration);
       var paper = safeUrl(p.paper);
+      var email = safeEmail(p.corresponding_email);
       setText(cell(tr, "Project", "project-title"), p.title);
       renderPeople(cell(tr, "Researchers", "project-people"), names);
       setText(cell(tr, "Description"), p.description);
       renderLink(cell(tr, "Preregistration", "project-link"), prereg, "View preregistration", p.title);
       renderLink(cell(tr, "Paper", "project-link"), paper, "Read paper", p.title);
+      renderEmail(cell(tr, "Corresponding author", "project-email"), email);
 
       tbody.appendChild(tr);
       rows.push({ tr: tr, text: [p.title, names.join(", "), p.description].join(" ").toLowerCase() });
 
-      counts.projects++;
-      names.forEach(function (name) { people[name.toLowerCase()] = true; });
       if (prereg) counts.preregistered++;
       if (paper) counts.papers++;
     });
-    counts.researchers = Object.keys(people).length;
     loaded = true;
     table.hidden = false;
     applyFilter();
@@ -127,6 +156,11 @@
     Array.prototype.forEach.call(stats.querySelectorAll("[data-stat]"), function (dd) {
       var value = values[dd.getAttribute("data-stat")];
       dd.textContent = value;
+      var dt = dd.parentNode.querySelector("dt[data-one]");
+      if (dt) {
+        if (!dt.hasAttribute("data-many")) dt.setAttribute("data-many", dt.textContent);
+        dt.textContent = dt.getAttribute(value === 1 ? "data-one" : "data-many");
+      }
       dd.parentNode.hidden = !value;
       if (value) shown++;
     });

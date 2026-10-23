@@ -1,21 +1,26 @@
 :root {
-  --paper: #f6f8fa;
-  --tint: #ebeff4;
-  --ink: #15203a;
-  --ink-soft: #4a5672;
-  --line: #d3dae4;
-  --navy: #1b2b4f;
-  --navy-ink: #e9eef7;
-  --navy-soft: #a9b6cf;
-  --accent: #12706a;
+  --paper: #faf8f4;
+  --tint: #f2eee6;
+  --ink: #2a3142;
+  --ink-soft: #5a6272;
+  --ink-faint: #6a707e;
+  --line: #e2dccf;
+  --row-hover: rgba(44, 107, 102, 0.05);
+  --button-hover: rgba(44, 107, 102, 0.06);
+  /* Header, hero, and footer */
+  --banner: var(--tint);
+  --banner-ink: var(--ink);
+  --banner-soft: var(--ink-soft);
+  --banner-line: var(--line);
+  --accent: #2c6b66;
+  --accent-hover: #245854;
   --accent-ink: #ffffff;
-  --marigold: #f2b134;
-  --focus: #f2b134;
+  --focus: #2c6b66;
 
   --serif: "Literata", Georgia, serif;
   --sans: "Atkinson Hyperlegible", system-ui, sans-serif;
 
-  --wrap: 72rem;
+  --wrap: 80rem;
   --gutter: clamp(1rem, 4vw, 2.5rem);
 }
 
@@ -25,10 +30,18 @@
     --tint: #16203a;
     --ink: #e6ebf3;
     --ink-soft: #a9b4c9;
+    --ink-faint: #8591a8;
     --line: #2b3a5a;
-    --navy: #0b1222;
+    --row-hover: rgba(255, 255, 255, 0.03);
+    --button-hover: rgba(255, 255, 255, 0.08);
+    --banner: #0b1222;
+    --banner-ink: #e9eef7;
+    --banner-soft: #a9b6cf;
+    --banner-line: rgba(255, 255, 255, 0.12);
     --accent: #5cc4b9;
+    --accent-hover: #7fd3ca;
     --accent-ink: #0b1222;
+    --focus: #f2b134;
   }
 }
 
@@ -74,7 +87,7 @@ h3 {
 p,
 dd,
 summary,
-.projects td {
+.projects td:not(.project-link) {
   text-wrap: pretty;
 }
 
@@ -129,8 +142,8 @@ a:hover {
   position: absolute;
   left: 1rem;
   top: -3rem;
-  background: var(--marigold);
-  color: #15203a;
+  background: var(--accent);
+  color: var(--accent-ink);
   padding: 0.5rem 1rem;
   z-index: 100;
 }
@@ -143,30 +156,34 @@ a:hover {
 
 .button {
   display: inline-block;
-  background: var(--marigold);
-  color: #15203a;
+  background: var(--accent);
+  color: var(--accent-ink);
   font-weight: 700;
   text-decoration: none;
   padding: 0.85rem 1.4rem;
   border-radius: 0.4rem;
-  border: 2px solid var(--marigold);
+  border: 2px solid var(--accent);
   line-height: 1.2;
 }
 
 .button:hover {
-  background: #ffc552;
-  border-color: #ffc552;
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+}
+
+.button-big {
+  font-size: 1.2rem;
+  padding: 1.05rem 1.9rem;
 }
 
 .button-ghost {
   background: transparent;
-  color: var(--navy-ink);
-  border-color: var(--navy-soft);
+  color: var(--accent);
 }
 
 .button-ghost:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: var(--navy-ink);
+  background: var(--button-hover);
+  color: var(--accent-hover);
 }
 
 /* Header */
@@ -175,9 +192,9 @@ a:hover {
   position: sticky;
   top: 0;
   z-index: 10;
-  background: var(--navy);
-  color: var(--navy-ink);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--banner);
+  color: var(--banner-ink);
+  border-bottom: 1px solid var(--banner-line);
 }
 
 .header-inner {
@@ -190,7 +207,7 @@ a:hover {
 .brand {
   font-family: var(--serif);
   font-weight: 600;
-  color: var(--navy-ink);
+  color: var(--banner-ink);
   text-decoration: none;
   margin-right: auto;
 }
@@ -204,12 +221,12 @@ a:hover {
 }
 
 .nav-list a {
-  color: var(--navy-soft);
+  color: var(--banner-soft);
   text-decoration: none;
 }
 
 .nav-list a:hover {
-  color: var(--navy-ink);
+  color: var(--banner-ink);
 }
 
 /* On narrow screens the nav moves to its own row under the brand */
@@ -262,34 +279,33 @@ a:hover {
 /* Hero */
 
 .hero {
-  background: var(--navy);
-  color: var(--navy-ink);
-  padding: clamp(3rem, 8vw, 6rem) 0 clamp(3rem, 7vw, 5rem);
-}
-
-.hero-inner {
-  display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
-  gap: clamp(2rem, 5vw, 4rem);
-  align-items: center;
-}
-
-/* No stats to show (still loading, failed, or all zero): give the copy the full width */
-.hero-inner:has(> .hero-stats[hidden]) {
-  grid-template-columns: minmax(0, 1fr);
+  background: var(--banner);
+  color: var(--banner-ink);
+  padding: clamp(2.5rem, 6vw, 4.5rem) 0 clamp(2.5rem, 5vw, 4rem);
 }
 
 .hero h1 {
-  font-size: clamp(2.25rem, 5vw, 3.5rem);
+  font-size: clamp(2.25rem, 5vw, 3.25rem);
   letter-spacing: -0.01em;
-  max-width: 16ch;
+  margin-bottom: 0.6em;
 }
 
 .lede {
   font-size: 1.15rem;
-  color: var(--navy-soft);
-  max-width: 36rem;
+  color: var(--banner-soft);
+  max-width: 40rem;
   margin-bottom: 2rem;
+}
+
+/* Sized to the heading, so the intro's right edge lines up with it */
+.hero-head {
+  width: fit-content;
+}
+
+.hero-head .lede {
+  width: 0;
+  min-width: 100%;
+  max-width: none;
 }
 
 .hero-actions {
@@ -299,8 +315,10 @@ a:hover {
 }
 
 .hero-stats {
-  margin: 0;
-  border-top: 2px solid var(--navy-soft);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 0;
+  margin: -0.75rem 0 2rem;
 }
 
 .hero-stats[hidden],
@@ -311,33 +329,39 @@ a:hover {
 .hero-stats div {
   display: flex;
   align-items: baseline;
-  gap: 1.25rem;
-  padding: 1rem 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  gap: 0.4rem;
+}
+
+/* A dot between counts, skipping hidden ones */
+.hero-stats div:not([hidden]) ~ div:not([hidden])::before {
+  content: "·";
+  order: -2;
+  color: var(--ink-faint);
+  margin: 0 0.75rem;
+}
+
+/* On phones the counts stack, so the dots go */
+@media (max-width: 36rem) {
+  .hero-stats {
+    flex-direction: column;
+  }
+  .hero-stats div:not([hidden]) ~ div:not([hidden])::before {
+    content: none;
+  }
 }
 
 .hero-stats dt {
-  color: var(--navy-soft);
+  color: var(--banner-soft);
 }
 
 .hero-stats dd {
   order: -1;
-  min-width: 3ch;
   margin: 0;
   font-family: var(--serif);
   font-weight: 600;
-  font-size: clamp(2rem, 4vw, 2.75rem);
+  font-size: 1.35rem;
   line-height: 1;
-  color: var(--marigold);
-}
-
-@media (max-width: 52rem) {
-  .hero-inner {
-    grid-template-columns: 1fr;
-  }
-  .hero-stats {
-    max-width: 30rem;
-  }
+  color: var(--accent);
 }
 
 /* Sections */
@@ -354,122 +378,6 @@ a:hover {
   color: var(--ink-soft);
   max-width: 40rem;
   margin-bottom: 2.5rem;
-}
-
-.two-col {
-  display: grid;
-  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
-  gap: clamp(2rem, 6vw, 5rem);
-  align-items: start;
-}
-
-.col-main {
-  max-width: 40rem;
-}
-
-@media (max-width: 52rem) {
-  .two-col {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* Facts */
-
-.facts {
-  margin: 0.5rem 0 0;
-  border-top: 2px solid var(--ink);
-}
-
-.facts div {
-  display: grid;
-  grid-template-columns: 8.5rem 1fr;
-  gap: 1rem;
-  padding: 0.85rem 0;
-  border-bottom: 1px solid var(--line);
-}
-
-.facts dt {
-  color: var(--ink-soft);
-}
-
-.facts dd {
-  margin: 0;
-  font-family: var(--serif);
-  font-weight: 600;
-}
-
-@media (max-width: 36rem) {
-  .facts div {
-    grid-template-columns: 7.25rem 1fr;
-    gap: 0.75rem;
-  }
-}
-
-/* Steps */
-
-.steps {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 2rem;
-  counter-reset: step;
-}
-
-.step {
-  counter-increment: step;
-  position: relative;
-  padding-top: 4.25rem;
-}
-
-.step::before {
-  content: counter(step);
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 3rem;
-  height: 3rem;
-  display: grid;
-  place-items: center;
-  border-radius: 50%;
-  background: var(--navy);
-  color: var(--navy-ink);
-  font-family: var(--serif);
-  font-size: 1.35rem;
-  font-weight: 600;
-}
-
-.step:not(:last-child)::after {
-  content: "";
-  position: absolute;
-  top: 1.5rem;
-  left: 3.75rem;
-  right: -1.25rem;
-  border-top: 2px solid var(--line);
-}
-
-.step p {
-  color: var(--ink-soft);
-}
-
-@media (max-width: 44rem) {
-  .steps {
-    grid-template-columns: 1fr;
-    gap: 0;
-  }
-  .step {
-    padding: 0 0 2rem 4.25rem;
-  }
-  .step:not(:last-child)::after {
-    display: block;
-    top: 3.5rem;
-    bottom: 0.5rem;
-    left: 1.5rem;
-    right: auto;
-    border-top: 0;
-    border-left: 2px solid var(--line);
-  }
 }
 
 /* Projects table */
@@ -546,15 +454,27 @@ a:hover {
   border-bottom: 1px solid var(--line);
 }
 
-.projects td:last-child,
-.projects th:last-child {
-  padding-right: 0;
+.projects td:first-child,
+.projects th:first-child {
+  padding-left: 0.75rem;
 }
 
-.projects th:nth-child(1) { width: 22%; }
-.projects th:nth-child(2) { width: 16%; }
+.projects td:last-child,
+.projects th:last-child {
+  padding-right: 0.75rem;
+}
+
+@media (hover: hover) {
+  .projects tbody tr:hover {
+    background: var(--row-hover);
+  }
+}
+
+.projects th:nth-child(1) { width: 19%; }
+.projects th:nth-child(2) { width: 14%; }
 .projects th:nth-child(4) { width: 10.5rem; }
-.projects th:nth-child(5) { width: 8.5rem; }
+.projects th:nth-child(5) { width: 7.5rem; }
+.projects th:nth-child(6) { width: 12rem; }
 
 .project-title {
   font-family: var(--serif);
@@ -572,17 +492,21 @@ a:hover {
   white-space: nowrap;
 }
 
+/* Long addresses break anywhere rather than widen the column */
+.project-email a {
+  overflow-wrap: anywhere;
+}
+
 .person {
   white-space: nowrap;
 }
 
-.muted {
-  color: var(--ink-soft);
-  font-style: italic;
+.empty {
+  color: var(--ink-faint);
 }
 
-/* Below this width the five columns get too narrow, so each project becomes a card */
-@media (max-width: 60rem) {
+/* Below this width the six columns get too narrow, so each project becomes a card */
+@media (max-width: 75rem) {
   .projects thead {
     position: absolute;
     width: 1px;
@@ -601,7 +525,12 @@ a:hover {
     padding: 1.1rem 0;
     border-bottom: 1px solid var(--line);
   }
-  .projects td {
+  .projects tbody tr:hover {
+    background: none;
+  }
+  .projects td,
+  .projects td:first-child,
+  .projects td:last-child {
     border: 0;
     padding: 0 0 0.5rem;
   }
@@ -610,7 +539,8 @@ a:hover {
   }
   /* The column header already names the cell for screen readers, so the visual label
      uses empty alt text; browsers without alt-text support use the first line */
-  .project-link::before {
+  .project-link::before,
+  .project-email::before {
     content: attr(data-label) ": ";
     content: attr(data-label) ": " / "";
     font-weight: 700;
@@ -648,7 +578,7 @@ summary {
   justify-content: space-between;
   gap: 1rem;
   padding: 1rem 0;
-  font-weight: 700;
+  font-size: 1.08rem;
 }
 
 summary::-webkit-details-marker {
@@ -698,8 +628,9 @@ details p {
 /* Footer */
 
 .site-footer {
-  background: var(--navy);
-  color: var(--navy-soft);
+  background: var(--banner);
+  border-top: 1px solid var(--banner-line);
+  color: var(--banner-soft);
   padding: 2rem 0;
   font-size: 0.95rem;
 }
@@ -709,5 +640,5 @@ details p {
 }
 
 .site-footer a {
-  color: var(--navy-ink);
+  color: var(--banner-ink);
 }

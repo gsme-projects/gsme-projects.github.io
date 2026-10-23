@@ -23,11 +23,12 @@ Edit `data/projects.json`. Each project is one entry:
   "researchers": ["First Researcher", "Second Researcher"],
   "description": "One or two sentences about the project.",
   "preregistration": "https://osf.io/abcde",
-  "paper": "https://doi.org/10.xxxx/xxxxx"
+  "paper": "https://doi.org/10.xxxx/xxxxx",
+  "corresponding_email": "name@university.edu"
 }
 ```
 
-List the people tied to the project in `researchers`. Leave `preregistration` or `paper` as `""` when there isn't one yet, and the table will show "Not yet available". `paper` can point to a preprint or the published paper. Only add projects the leadership team has approved. Projects appear in the order they're listed in the file. Check the file is valid JSON (for example with `python3 -m json.tool data/projects.json`) before pushing, because a syntax error stops the whole table from loading.
+List the people tied to the project in `researchers`, and the corresponding author's email address in `corresponding_email`. Leave `preregistration`, `paper`, or `corresponding_email` as `""` when there isn't one yet, and the table will show a dash (—). `paper` can point to a preprint or the published paper. Only add projects the leadership team has approved. Projects appear in the order they're listed in the file. Check the file is valid JSON (for example with `python3 -m json.tool data/projects.json`) before pushing, because a syntax error stops the whole table from loading.
 
 ## Previewing locally
 
